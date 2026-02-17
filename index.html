@@ -618,6 +618,9 @@ Basketball
 <button id="chessBtn" style="background: linear-gradient(135deg, #6f42c1, #5a32a3); color: white; padding: 12px 25px; border: none; border-radius: 20px; font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.3s ease; min-width: 150px;">
 Chess
 </button>
+<button id="fifaBtn" style="background: linear-gradient(135deg, #17a2b8, #138496); color: white; padding: 12px 25px; border: none; border-radius: 20px; font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.3s ease; min-width: 150px;">
+FIFA Gaming
+</button>
 </div>
 <button id="backToMainBtn2" style="background: #6c757d; color: white; padding: 8px 20px; border: none; border-radius: 15px; font-size: 0.9rem; cursor: pointer; margin-top: 20px;">
 ← Back
@@ -782,6 +785,10 @@ document.getElementById('chessBtn').addEventListener('click', function() {
 showSportDetails('Chess', '₹50 per participant<br>Individual competition', 'individual');
 });
 
+document.getElementById('fifaBtn').addEventListener('click', function() {
+showSportDetails('FIFA Gaming', '₹50 per participant<br>Individual gaming competition', 'fifa');
+});
+
 function showSportDetails(sport, details, sportType) {
 document.getElementById('sportTitle').textContent = sport + ' Registration';
 document.getElementById('sportDetails').innerHTML = '<strong>Registration Details:</strong><br><br>' + details;
@@ -795,8 +802,11 @@ if (sportType === 'team') {
 // Team sports form
 window.open('https://docs.google.com/forms/d/e/1FAIpQLScptxd9d9oEFZxtOuVSF6Rq3KCFdWDRDJzu5Rf-jE-SfqXXQQ/viewform', '_blank');
 } else if (sportType === 'individual') {
-// Individual sports form
+// Individual sports form (Chess)
 window.open('https://docs.google.com/forms/d/e/1FAIpQLSeKyBVjIn-bJqvwMbAx9gxHXGB2q3B__YXBNgwP7vkrYpyEuQ/viewform', '_blank');
+} else if (sportType === 'fifa') {
+// FIFA Gaming form
+window.open('https://docs.google.com/forms/d/e/1FAIpQLSfL7BP1Ov2PAb53DQ9sTjeSAT1-4ahJ1Yv174KkViHHGTac3A/viewform', '_blank');
 }
 document.getElementById('sportDetailsModal').style.display = 'none';
 });
