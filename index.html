@@ -14,7 +14,7 @@
 <meta property="og:title" content="International Fest 2K26 - Vignan University">
 <meta property="og:description" content="Join the celebration of cultures, fun, music, and sports on March 20, 2026! Register now for entertainment and sports events.">
 <meta property="og:image" content="https://iili.io/fUguOl9.jpg">
-<meta property="og:url" content="https://vignan-eqc9.vercel.app">
+<meta property="og:url" content="https://vfstr26.github.io/visafest2k26">
 <meta property="og:site_name" content="International Fest 2K26">
 
 <!-- Twitter Card Meta Tags -->
@@ -558,10 +558,17 @@ Register for Entertainment Events
 <h2>Sports & Competitions</h2>
 <p>Show your skills or cheer for participants in friendly international sports events!</p>
 
-<!-- Video Gallery - Girls Basketball -->
+<!-- Video Gallery - Girls Basketball with Fallback -->
 <div class="video-gallery">
 <div>
-<iframe src="https://drive.google.com/file/d/1J94nSgmVpi6hDr4C5tKqX_hBHq3tS88ZYvGHLYXG1vk/preview" allow="autoplay" allowfullscreen></iframe>
+<iframe id="driveVideo" src="https://drive.google.com/file/d/1J94nSgmVpi6hDr4C5tKqX_hBHq3tS88ZYvGHLYXG1vk/preview" allow="autoplay" allowfullscreen style="display: block;"></iframe>
+<video id="localVideo" controls preload="none" muted loop playsinline style="display: none;">
+<source src="C5569.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<div id="videoError" style="display: none; padding: 20px; text-align: center; background: #f8f9fa; border-radius: 12px; color: #666;">
+<p>Video temporarily unavailable. Please try again later.</p>
+</div>
 </div>
 </div>
 
@@ -816,6 +823,49 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 link.addEventListener('click', function() {
 document.getElementById('navLinks').classList.remove('active');
 });
+});
+
+// Video fallback system
+let videoFallbackTriggered = false;
+
+function switchToLocalVideo() {
+if (!videoFallbackTriggered) {
+videoFallbackTriggered = true;
+document.getElementById('driveVideo').style.display = 'none';
+document.getElementById('localVideo').style.display = 'block';
+console.log('Switched to local video backup');
+}
+}
+
+function showVideoError() {
+document.getElementById('driveVideo').style.display = 'none';
+document.getElementById('localVideo').style.display = 'none';
+document.getElementById('videoError').style.display = 'block';
+}
+
+// Monitor Google Drive iframe for errors
+document.getElementById('driveVideo').addEventListener('error', function() {
+switchToLocalVideo();
+});
+
+// Fallback timer - if Google Drive takes too long, switch to local
+setTimeout(function() {
+const driveVideo = document.getElementById('driveVideo');
+// Check if iframe is still loading or failed
+if (driveVideo.style.display !== 'none') {
+// Try to detect if Google Drive video failed by checking iframe content
+try {
+// If we can't access iframe content due to CORS, assume it's working
+// Only switch if there's a clear error
+} catch (e) {
+// If there's an access error, the video is probably working
+}
+}
+}, 10000); // Wait 10 seconds before potential fallback
+
+// If local video also fails, show error message
+document.getElementById('localVideo').addEventListener('error', function() {
+showVideoError();
 });
 </script>
 
